@@ -59,7 +59,7 @@ class PublishingTests(unittest.TestCase):
             "config": {"TCP": {"443": {"HTTPS": True}}, "Web": {"test.example.ts.net:443": self.old_route}},
             "calls": [],
         }))
-        environment = {"PATH": str(self.bin) + ":" + os.environ["PATH"], "SHARE_TEST_STATE": str(self.state_file), "TAILSCALE_SHARE_ROOT": str(self.base / "shares"), "TAILSCALE_SHARE_TAILNET": "example.test"}
+        environment = {"PATH": str(self.bin) + ":" + os.environ["PATH"], "SHARE_TEST_STATE": str(self.state_file), "TAILSCALE_SHARE_ROOT": str(self.base / "shares"), "TAILSCALE_SHARE_TAILNET": "example.test", "AGENT_SKILLS_CONFIG": str(self.base / "preferences.json")}
         self.environment = patch.dict(os.environ, environment)
         self.environment.start()
         self.addCleanup(self.environment.stop)
@@ -171,6 +171,18 @@ class PublishingTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "Unauthorized"):
                 publisher.tailscale("serve", "status", "--json")
             self.assertEqual(run.call_count, 1)
+
+    def test_personal_preferences_are_local_and_environment_overrides_them(self) -> None:
+        path = self.base / "preferences.json"
+        path.write_text(json.dumps({"tailscale-share": {"tailnet": "other.example", "root": str(self.base / "configured")}}))
+        self.assertEqual(publisher.identity(), "test.example.ts.net")
+        self.assertEqual(publisher.share_root(), self.base / "shares")
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("TAILSCALE_SHARE_TAILNET")
+            os.environ.pop("TAILSCALE_SHARE_ROOT")
+            with self.assertRaisesRegex(RuntimeError, "Expected tailnet"):
+                publisher.identity()
+            self.assertEqual(publisher.share_root(), self.base / "configured")
 
 
 if __name__ == "__main__":

@@ -55,6 +55,24 @@ Skills discover local context or use configurable paths; no particular personal
 workspace, machine, or tailnet is assumed. Keep local configuration, credentials,
 and generated output outside tracked source files.
 
+Optional personal preferences can be kept in
+`~/.config/agent-skills/config.json`, or another path selected with
+`AGENT_SKILLS_CONFIG`. For example:
+
+```json
+{
+  "reference-projects": {
+    "checkouts": "~/.local/share/reference-projects/checkouts",
+    "notes": "~/.local/share/reference-projects/notes"
+  },
+  "reference-code": {"directory": "~/reference-code"},
+  "tailscale-share": {"root": "~/Public/agent-share"}
+}
+```
+
+Environment overrides take precedence. Do not commit a personal configuration
+to this public repository.
+
 The sharing helper needs Python 3.10+ and the Tailscale CLI. It discovers the
 current connected device's DNS name. Optional environment variables:
 

@@ -9,7 +9,9 @@ license: AGPL-3.0-only
 Use the workspace and reference register chosen by the user or project. Read
 applicable project instructions before changing records. If no location is
 specified, use `REFERENCE_PROJECTS_ROOT` for checkouts and `REFERENCE_NOTES_ROOT`
-for records when set; otherwise use `~/.local/share/reference-projects/checkouts`
+for records when set. Also consult the optional local file
+`~/.config/agent-skills/config.json` (or `AGENT_SKILLS_CONFIG`), whose
+`reference-projects` section can set `checkouts` and `notes`. Otherwise use `~/.local/share/reference-projects/checkouts`
 and `~/.local/share/reference-projects/notes`. These are defaults, not a reason
 to move existing work.
 

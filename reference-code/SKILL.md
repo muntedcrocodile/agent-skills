@@ -10,6 +10,9 @@ Look for relevant examples in the current project and any reference locations
 named by the user or project documentation. `REFERENCE_CODE_DIR` can point to
 an additional library of examples. Do not assume a particular personal directory
 or require a separate library when the project already contains the pattern.
+The optional local config file `~/.config/agent-skills/config.json` (or
+`AGENT_SKILLS_CONFIG`) can also set `reference-code.directory`. Read that
+preference only when locating examples for the current task.
 
 If a reference checkout needs to be located or acquired, consult the sibling
 [`reference-projects`](../reference-projects/SKILL.md) skill when available.

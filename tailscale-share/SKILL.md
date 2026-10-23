@@ -11,6 +11,9 @@ Resolve its path relative to this SKILL.md, including when this skill is symlink
 Publishing uses the currently connected tailnet. Inspect the active identity
 and follow any tailnet specified by the user. Set `TAILSCALE_SHARE_TAILNET` to
 require a particular tailnet; the helper discovers the device DNS name at runtime.
+Local preferences can also live in `~/.config/agent-skills/config.json` under
+`tailscale-share`, with optional `tailnet` and `root` fields. Environment variables
+take precedence. `AGENT_SKILLS_CONFIG` selects a different local config file.
 
 ## Publish
 

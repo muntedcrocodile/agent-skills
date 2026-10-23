@@ -18,6 +18,17 @@ PRIVATE_PORT = 8444
 PUBLIC_PORT = 8443
 
 
+def preferences() -> dict:
+    path = Path(os.environ.get("AGENT_SKILLS_CONFIG", str(Path.home() / ".config/agent-skills/config.json"))).expanduser()
+    if not path.is_file():
+        return {}
+    document = json.loads(path.read_text())
+    values = document.get("tailscale-share", {})
+    if not isinstance(values, dict):
+        raise ValueError("The tailscale-share configuration must be an object")
+    return values
+
+
 def tailscale(*arguments: str) -> str:
     result = subprocess.run(["tailscale", *arguments], capture_output=True, text=True, timeout=45)
     # Direct filesystem serving needs root even on some operator-configured
@@ -37,7 +48,7 @@ def identity() -> str:
     status = json.loads(tailscale("status", "--json"))
     if status.get("BackendState") != "Running":
         raise RuntimeError("Tailscale is disconnected. Run sudo tailscale up, then retry.")
-    expected = os.environ.get("TAILSCALE_SHARE_TAILNET")
+    expected = os.environ.get("TAILSCALE_SHARE_TAILNET") or preferences().get("tailnet")
     actual = status.get("CurrentTailnet", {}).get("Name")
     if expected and actual != expected:
         raise RuntimeError(f"Expected tailnet {expected!r}, found {actual!r}. Check login or TAILSCALE_SHARE_TAILNET.")
@@ -48,7 +59,7 @@ def identity() -> str:
 
 
 def share_root() -> Path:
-    root = Path(os.environ.get("TAILSCALE_SHARE_ROOT", str(Path.home() / "Public/agent-share"))).expanduser().absolute()
+    root = Path(os.environ.get("TAILSCALE_SHARE_ROOT") or preferences().get("root") or str(Path.home() / "Public/agent-share")).expanduser().absolute()
     for component in (root, *root.parents):
         if component.is_symlink():
             raise RuntimeError(f"Share path must not traverse symlinks: {component}")

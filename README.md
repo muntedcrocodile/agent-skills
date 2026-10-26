@@ -10,6 +10,7 @@ licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE).
 | [reference-projects](reference-projects/SKILL.md) | Maintain reference checkouts and records of inspected revisions. |
 | [tailscale-share](tailscale-share/SKILL.md) | Publish static artifacts privately through Serve or publicly through Funnel. |
 | [html-publish](html-publish/SKILL.md) | Build a Tailwind v4 HTML artifact and publish a clickable link. |
+| [matrix-notify](matrix-notify/SKILL.md) | Send personal Matrix notifications and tailnet links, including in encrypted rooms. |
 
 ## Optional, on-demand instructions
 
@@ -92,6 +93,13 @@ not publish anything.
 The HTML starter uses Tailwind v4's browser package for prototypes. The skill
 also describes compiling CSS for durable or offline artifacts. Git is needed
 for reference-repository workflows.
+
+Matrix notifications use the pinned `matrix-nio[e2e]` dependency. Run
+`matrix-notify/scripts/setup.sh`, copy its `.env.example` to a private env file,
+and run `matrix-notify/scripts/notify.sh init` once to create a dedicated device.
+The default env path is `~/.config/agent-skills/matrix.env`; keep the actual
+credentials and persistent device store outside this public checkout. See the
+skill for overrides and the HTML-to-tailnet workflow for long reports.
 
 ## Develop and verify
 

@@ -6,6 +6,7 @@ licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE).
 | Skill | Purpose |
 | --- | --- |
 | [frontend-design](frontend-design/SKILL.md) | Design and implement a deliberate visual interface. |
+| [openai-ui-design](openai-ui-design/SKILL.md) | OpenAI-only UI design delegation to GLM through OpenCode, with recursion guards. |
 | [reference-code](reference-code/SKILL.md) | Inspect existing examples and adapt relevant implementation patterns. |
 | [reference-projects](reference-projects/SKILL.md) | Maintain reference checkouts and records of inspected revisions. |
 | [tailscale-share](tailscale-share/SKILL.md) | Publish static artifacts privately through Serve or publicly through Funnel. |

@@ -1,0 +1,5 @@
+interface:
+  display_name: "OpenAI UI Design"
+  short_description: "OpenAI-only UI design delegation to GLM"
+policy:
+  allow_implicit_invocation: true

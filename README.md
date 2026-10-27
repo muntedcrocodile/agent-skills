@@ -8,6 +8,7 @@ licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE).
 | [web-design](web-design/SKILL.md) | Recommend and discuss a Bun/Tailwind v4 React stack, then build; optional self-hosted Convex bundle. |
 | [frontend-design](frontend-design/SKILL.md) | Design and implement a deliberate visual interface. |
 | [openai-ui-design](openai-ui-design/SKILL.md) | OpenAI-only UI design delegation to GLM through OpenCode, with recursion guards. |
+| [jev](jev/SKILL.md) | Delegate typed semantic decisions and batches to Jev, with a portable Python client. |
 | [reference-code](reference-code/SKILL.md) | Inspect existing examples and adapt relevant implementation patterns. |
 | [reference-projects](reference-projects/SKILL.md) | Maintain reference checkouts and records of inspected revisions. |
 | [tailscale-share](tailscale-share/SKILL.md) | Publish static artifacts privately through Serve or publicly through Funnel. |

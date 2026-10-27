@@ -1,0 +1,3 @@
+interface:
+  display_name: "Jev"
+  short_description: "Typed decisions with Jev for any agent workflow"

@@ -1,0 +1,4 @@
+ARG CONVEX_BACKEND_IMAGE
+FROM ${CONVEX_BACKEND_IMAGE}
+COPY --chmod=755 backend-entrypoint.sh /convex/project-entrypoint.sh
+ENTRYPOINT ["/convex/project-entrypoint.sh"]

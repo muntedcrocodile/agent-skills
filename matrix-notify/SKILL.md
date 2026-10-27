@@ -55,6 +55,11 @@ Process `MATRIX_*` variables override file values. Env files contain literal
 assignments, not shell commands; never source them or print their contents.
 
 `MATRIX_HOMESERVER`, `MATRIX_USER_ID`, and `MATRIX_ROOM_ID` are required.
+Set `MATRIX_HOMESERVER` to the homeserver's canonical public HTTPS base URL
+(for example, `https://matrix.example.org`) on every host, including the server
+itself. Verify it from each sending machine. Loopback addresses, Docker service
+names, LAN IPs, and tailnet-only addresses are not portable to other agents;
+do not substitute one when the public endpoint fails.
 `MATRIX_HOME_ROOM` and `MATRIX_HOME_ROOM_THREAD_ID` are accepted as destination
 aliases for existing Hermes configurations. A thread ID is optional.
 
@@ -69,6 +74,15 @@ between concurrently active hosts; initialize a separate device on each host.
 `init` is idempotent when a session already exists. `check` validates access and
 room state without posting a message. The account must already be joined to the
 configured room; the helper does not invite people or create rooms.
+
+Existing sessions are bound to their configured homeserver URL. When correcting
+an address for the same server, first verify the existing token's authenticated
+`/_matrix/client/v3/account/whoami` response over the public HTTPS endpoint
+matches the saved user and device IDs. Back up the private env file and session,
+then update `MATRIX_HOMESERVER` and the session's `homeserver` together while the
+device is idle. Retain its token, device ID, and encryption store, and run
+`check` before sending. A different server or account needs a separate state
+directory. Never print tokens while performing this check.
 
 The helper supports encrypted rooms through matrix-nio and keeps persistent keys.
 It shares encrypted delivery keys with joined members' unverified devices by

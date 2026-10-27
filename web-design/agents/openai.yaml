@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Design"
+  short_description: "Choose a web stack, consult, then build with Bun"
+  default_prompt: "Use $web-design to recommend a stack for this site, discuss it with me, and implement the agreed approach."

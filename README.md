@@ -5,6 +5,7 @@ licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE).
 
 | Skill | Purpose |
 | --- | --- |
+| [web-design](web-design/SKILL.md) | Recommend and discuss a Bun/Tailwind v4 React stack, then build; optional self-hosted Convex bundle. |
 | [frontend-design](frontend-design/SKILL.md) | Design and implement a deliberate visual interface. |
 | [openai-ui-design](openai-ui-design/SKILL.md) | OpenAI-only UI design delegation to GLM through OpenCode, with recursion guards. |
 | [reference-code](reference-code/SKILL.md) | Inspect existing examples and adapt relevant implementation patterns. |
@@ -106,6 +107,7 @@ skill for overrides and the HTML-to-tailnet workflow for long reports.
 
 ```bash
 python3 -m unittest discover -s tests -v
+bun test web-design/tests
 ```
 
 Tests use temporary directories and a fake Tailscale CLI; they do not configure

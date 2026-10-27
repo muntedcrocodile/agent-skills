@@ -1,0 +1,44 @@
+name: ${COMPOSE_PROJECT_NAME:?Run configure.ts first}
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        CONVEX_BACKEND_IMAGE: ${CONVEX_BACKEND_IMAGE:?Set the pinned backend image}
+    restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 30s
+    environment:
+      INSTANCE_NAME: ${INSTANCE_NAME:?Run configure.ts first}
+      INSTANCE_SECRET: ${INSTANCE_SECRET:?Run configure.ts first}
+      CONVEX_CLOUD_ORIGIN: ${CONVEX_CLOUD_ORIGIN:?Set the API origin}
+      CONVEX_SITE_ORIGIN: ${CONVEX_SITE_ORIGIN:?Set the HTTP actions origin}
+      DISABLE_BEACON: 'true'
+      DISABLE_METRICS_ENDPOINT: 'true'
+    volumes:
+      - convex_data:/convex/data
+    healthcheck:
+      test: [CMD, curl, -fsS, http://localhost:3210/version]
+      interval: 5s
+      timeout: 5s
+      start_period: 30s
+      retries: 12
+  gateway:
+    image: ${NGINX_IMAGE:?Set the pinned Nginx image}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '${PROXY_BIND_ADDRESS:-127.0.0.1}:${API_PORT:-3210}:8081'
+      - '${PROXY_BIND_ADDRESS:-127.0.0.1}:${HTTP_PORT:-3211}:8082'
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8081/version]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+volumes:
+  convex_data:

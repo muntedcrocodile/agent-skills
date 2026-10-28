@@ -6,6 +6,7 @@ The following skills are imported or adapted from [Matt Pocock’s skills](https
 - `grill-with-docs/`: [skills/engineering/grill-with-docs/](https://github.com/mattpocock/skills/tree/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/engineering/grill-with-docs/)
 - `grilling/`: [skills/productivity/grilling/](https://github.com/mattpocock/skills/tree/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/grilling/)
 - `handoff/`: [skills/productivity/handoff/](https://github.com/mattpocock/skills/tree/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/productivity/handoff/)
+- `to-spec/`: [skills/engineering/to-spec/](https://github.com/mattpocock/skills/tree/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/engineering/to-spec/), imported at revision `59db609eb1e18aaf59b63284d0e52255aff0c63c` and locally adapted for invocation wording and GitHub issue-tracker setup.
 
 These directories, including supporting Markdown files, retain the MIT license below. Other original skills use the repository’s AGPL-3.0-only license.
 

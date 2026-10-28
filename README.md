@@ -16,6 +16,7 @@ and pinned revisions.
 | [html-publish](html-publish/SKILL.md) | Build a Tailwind v4 HTML artifact and publish a clickable link. |
 | [matrix-notify](matrix-notify/SKILL.md) | Send personal Matrix notifications and tailnet links, including in encrypted rooms. |
 | [grill-with-docs](grill-with-docs/SKILL.md) | Interview the user to align on a plan, recording shared terminology and significant decisions. |
+| [to-spec](to-spec/SKILL.md) | Turn an aligned conversation into a spec and publish it to the project issue tracker. |
 | [handoff](handoff/SKILL.md) | Capture conversation context for another agent to continue. |
 | [grilling](grilling/SKILL.md) | Supporting interview discipline used by grill-with-docs. |
 | [domain-modeling](domain-modeling/SKILL.md) | Supporting terminology, glossary, and decision-record discipline used by grill-with-docs. |

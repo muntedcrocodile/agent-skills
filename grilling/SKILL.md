@@ -21,6 +21,8 @@ Format a round like so:
 ➡️ <your recommended answer>
 ```
 
+Always use the built in question asking tool when available if no such tool is present ask in plane text.
+
 Word each question so "yes" accepts your recommended answer.
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.

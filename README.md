@@ -1,7 +1,9 @@
 # Agent skills
 
-Reusable, optional skills for coding and research agents. The repository is
-licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE).
+Reusable, optional skills for coding and research agents. Original skills are
+licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE). Imported Matt Pocock
+skills retain their MIT license; see [THIRD_PARTY.md](THIRD_PARTY.md) for sources
+and pinned revisions.
 
 | Skill | Purpose |
 | --- | --- |
@@ -9,11 +11,14 @@ licensed under **AGPL-3.0-only**; see [LICENSE](LICENSE).
 | [frontend-design](frontend-design/SKILL.md) | Design and implement a deliberate visual interface. |
 | [openai-ui-design](openai-ui-design/SKILL.md) | OpenAI-only UI design delegation to GLM through OpenCode, with recursion guards. |
 | [jev](jev/SKILL.md) | Delegate typed semantic decisions and batches to Jev, with a portable Python client. |
-| [reference-code](reference-code/SKILL.md) | Inspect existing examples and adapt relevant implementation patterns. |
-| [reference-projects](reference-projects/SKILL.md) | Maintain reference checkouts and records of inspected revisions. |
+| [reference-projects](reference-projects/SKILL.md) | Locate, clone, and safely refresh reference checkouts for code inspection. |
 | [tailscale-share](tailscale-share/SKILL.md) | Publish static artifacts privately through Serve or publicly through Funnel. |
 | [html-publish](html-publish/SKILL.md) | Build a Tailwind v4 HTML artifact and publish a clickable link. |
 | [matrix-notify](matrix-notify/SKILL.md) | Send personal Matrix notifications and tailnet links, including in encrypted rooms. |
+| [grill-with-docs](grill-with-docs/SKILL.md) | Interview the user to align on a plan, recording shared terminology and significant decisions. |
+| [handoff](handoff/SKILL.md) | Capture conversation context for another agent to continue. |
+| [grilling](grilling/SKILL.md) | Supporting interview discipline used by grill-with-docs. |
+| [domain-modeling](domain-modeling/SKILL.md) | Supporting terminology, glossary, and decision-record discipline used by grill-with-docs. |
 
 ## Optional, on-demand instructions
 
@@ -66,10 +71,8 @@ Optional personal preferences can be kept in
 ```json
 {
   "reference-projects": {
-    "checkouts": "~/.local/share/reference-projects/checkouts",
-    "notes": "~/.local/share/reference-projects/notes"
+    "checkouts": "~/.local/share/reference-projects/checkouts"
   },
-  "reference-code": {"directory": "~/reference-code"},
   "tailscale-share": {"root": "~/Public/agent-share"}
 }
 ```
@@ -83,9 +86,7 @@ current connected device's DNS name. Optional environment variables:
 - `TAILSCALE_SHARE_TAILNET`: require a particular tailnet name before sharing.
 - `TAILSCALE_SHARE_ROOT`: choose the local artifact folder; the default is
   `~/Public/agent-share`, with separate `tailnet/` and `public/` directories.
-- `REFERENCE_PROJECTS_ROOT` and `REFERENCE_NOTES_ROOT`: reference checkout and
-  note locations used by the research skills.
-- `REFERENCE_CODE_DIR`: an additional existing directory of code examples.
+- `REFERENCE_PROJECTS_ROOT`: reference checkout location used by the research skill.
 
 Tailscale account enrollment, access policy, and HTTPS availability belong to
 the user's environment. Sharing is private by default. Public publishing needs

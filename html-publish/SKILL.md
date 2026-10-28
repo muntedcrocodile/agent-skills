@@ -1,6 +1,6 @@
 ---
 name: html-publish
-description: Create and publish a standalone HTML plan, explanation, comparison, or interactive visualization with Tailwind CSS v4 and a clickable Tailscale link. Use when HTML helps communicate the result or the user asks for a shareable HTML artifact.
+description: Create and publish a standalone HTML file, explanation, comparison, or interactive visualization as a link the user can easily access or share. Use when HTML helps communicate the result or the user asks for an HTML doc or says "publish".
 license: AGPL-3.0-only
 ---
 
@@ -16,19 +16,10 @@ tool and embed or link the result.
 ## Tailwind v4 without a build step
 
 Copy `assets/starter.html` into a task-specific output directory outside the
-publishing folders. Replace its example title and content. It includes:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<style type="text/tailwindcss">
-  @theme { --color-accent: #075985; }
-</style>
-```
+publishing folders. Replace its example title and content. It includes tailwind v4.
 
 This is the **v4 browser package**. Do not use the v3 `cdn.tailwindcss.com`
-script or a v3 `tailwind.config` snippet. The browser package requires internet
-access to jsDelivr; tailnet connectivity alone does not supply that dependency.
-Keep important text readable with the starter's ordinary CSS if the CDN fails.
+script or a v3 `tailwind.config` snippet.
 Inline small scripts and SVGs; use relative paths for bundled assets. Do not
 include API keys or require a development server to open the result.
 
@@ -38,9 +29,10 @@ offline styling, compile CSS with the official v4 CLI in a temporary build
 directory, then publish only the static output:
 
 ```bash
-npm install --save-dev tailwindcss@4 @tailwindcss/cli@4
+
+bun add -d tailwindcss@4 @tailwindcss/cli@4
 # input.css: @import "tailwindcss"; and @source "./index.html";
-npx @tailwindcss/cli -i ./input.css -o ./styles.css --minify
+bunx @tailwindcss/cli -i ./input.css -o ./styles.css --minify
 ```
 
 Reference the generated `styles.css`, remove the browser CDN script and
@@ -56,10 +48,7 @@ manifests from the publication bundle.
 2. Preview in a browser when available. Check narrow and wide layouts, main
    interactions, and console/network errors. Without a browser, inspect the
    markup and links and disclose the limits of validation.
-3. Use `tailscale-share/scripts/publish.py publish /absolute/path/output --name
-   descriptive-slug`. Publish on the tailnet unless the user requested public
-   access; then use that skill's `--public` option. The complete output directory
-   is copied so relative assets work.
+3. Use `tailscale-share` skill to publish what you need to publish.
 4. Return a short Markdown link to the page and identify tailnet/public access.
    Include any material dependency or hosting limitation. Do not finish with
    only a local file path when publishing was requested.

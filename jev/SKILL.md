@@ -1,6 +1,6 @@
 ---
 name: jev
-description: Use Jev for typed semantic decisions over supplied text, records, documents, images, or current application state. Apply when routing, classifying, checking a proposition, ranking by a rubric, or choosing among concrete options would benefit from a decision model.
+description: Use Jev for typed semantic decisions over supplied text, records, documents, images, or current application state. Apply when routing, classifying, checking a proposition, ranking by a rubric, or choosing among concrete options would benefit from a decision model. Use when the user requests "Jev" or "use jev".
 ---
 
 # Jev

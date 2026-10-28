@@ -78,5 +78,6 @@ command for an administrator to run. On macOS, direct directory serving requires
 the open-source Tailscale variant; other variants need a persistent localhost
 static server and a Serve proxy, outside this helper's automated baseline.
 
-References: [Serve](https://tailscale.com/docs/reference/tailscale-cli/serve),
+References:
+[Serve](https://tailscale.com/docs/reference/tailscale-cli/serve),
 [Funnel](https://tailscale.com/docs/features/tailscale-funnel).

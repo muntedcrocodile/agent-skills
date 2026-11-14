@@ -14,6 +14,7 @@ and pinned revisions.
 | [reference-projects](reference-projects/SKILL.md) | Locate, clone, and safely refresh reference checkouts for code inspection. |
 | [tailscale-share](tailscale-share/SKILL.md) | Publish static artifacts privately through Serve or publicly through Funnel. |
 | [html-publish](html-publish/SKILL.md) | Build a Tailwind v4 HTML artifact and publish a clickable link. |
+| [journal](journal/SKILL.md) | Track items (bugs, follow-ups, ideas, decisions) in a per-project journal with statuses, published as a stable HTML link. |
 | [matrix-notify](matrix-notify/SKILL.md) | Send personal Matrix notifications and tailnet links, including in encrypted rooms. |
 | [grill-with-docs](grill-with-docs/SKILL.md) | Interview the user to align on a plan, recording shared terminology and significant decisions. |
 | [to-spec](to-spec/SKILL.md) | Turn an aligned conversation into a spec and publish it to the project issue tracker. |

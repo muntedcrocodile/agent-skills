@@ -118,7 +118,7 @@ def ensure_endpoint(public: bool = False) -> tuple[Path, str]:
     return directory, f"https://{host}:{port}"
 
 
-def publish(source: Path, name: str, public: bool = False) -> str:
+def publish(source: Path, name: str, public: bool = False, replace: bool = False) -> str:
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", name):
         raise RuntimeError("Name must be 1–64 lowercase letters, digits, or hyphens, starting with a letter/digit.")
     # Check original path before resolve(), which would conceal a source symlink.
@@ -132,7 +132,7 @@ def publish(source: Path, name: str, public: bool = False) -> str:
     if source == root or root in source.parents or source in directory.parents:
         raise RuntimeError("Choose an input outside the publishing directory.")
     destination = directory / name
-    if destination.exists():
+    if destination.exists() and not replace:
         raise RuntimeError(f"Publication already exists: {destination}. Choose a new --name or remove it first.")
     # Stage beside the served directory so visitors never see a partial copy.
     with tempfile.TemporaryDirectory(prefix=".share-stage-", dir=directory.parent) as temporary:
@@ -143,8 +143,14 @@ def publish(source: Path, name: str, public: bool = False) -> str:
         else:
             staged.mkdir()
             shutil.copy2(source, staged / source.name, follow_symlinks=False)
-            suffix = "/" + quote(source.name, safe="")
+            # A page named index.html is served at its folder URL; never link the file itself.
+            suffix = "/" if source.name == "index.html" else "/" + quote(source.name, safe="")
         check_tree(staged)
+        if destination.exists():
+            # Swap in the new copy, then discard the old one, keeping the URL stable.
+            check_tree(destination)
+            retired = Path(temporary) / "retired"
+            destination.rename(retired)
         staged.rename(destination)
     return f"{base}/{name}{suffix}"
 
@@ -177,6 +183,7 @@ def main() -> int:
     publish_parser.add_argument("source", type=Path)
     publish_parser.add_argument("--name", required=True)
     publish_parser.add_argument("--public", action="store_true")
+    publish_parser.add_argument("--replace", action="store_true", help="Replace an existing publication of the same name")
     commands.add_parser("status", help="Read-only: show identity, folder locations, and Serve configuration")
     stop_parser = commands.add_parser("stop", help="Disable only the selected sharing endpoint")
     stop_parser.add_argument("--public", action="store_true")
@@ -191,7 +198,7 @@ def main() -> int:
             directory, url = ensure_endpoint(arguments.public)
             print(f"Directory: {directory}\nURL: {url}/")
         else:
-            url = publish(arguments.source, arguments.name, arguments.public)
+            url = publish(arguments.source, arguments.name, arguments.public, arguments.replace)
             verify(url)
             print(url)
         return 0

@@ -50,6 +50,8 @@ manifests from the publication bundle.
    markup and links and disclose the limits of validation.
 3. Use `tailscale-share` skill to publish what you need to publish.
 4. Return a short Markdown link to the page and identify tailnet/public access.
+   Use the URL the helper prints: the folder URL ending in `/`, never a link
+   ending in `index.html`.
    Include any material dependency or hosting limitation. Do not finish with
    only a local file path when publishing was requested.
 

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{project}} journal</title>
+    <style>
+      :root {
+        --bg: #fafaf9; --fg: #1c1917; --muted: #57534e; --card: #ffffff; --line: #d6d3d1; --accent: #075985;
+        --todo: #b45309; --todo-bg: #fef3c7;
+        --doing: #1d4ed8; --doing-bg: #dbeafe;
+        --done: #15803d; --done-bg: #dcfce7;
+        --ignored: #57534e; --ignored-bg: #e7e5e4;
+        --reoccured: #b91c1c; --reoccured-bg: #fee2e2;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1c1917; --fg: #f5f5f4; --muted: #a8a29e; --card: #292524; --line: #44403c; --accent: #7dd3fc;
+          --todo: #fbbf24; --todo-bg: #451a03;
+          --doing: #93c5fd; --doing-bg: #172554;
+          --done: #86efac; --done-bg: #052e16;
+          --ignored: #d6d3d1; --ignored-bg: #44403c;
+          --reoccured: #fca5a5; --reoccured-bg: #450a0a;
+        }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--fg); font-family: system-ui, sans-serif; line-height: 1.6; }
+      main { max-width: 60rem; margin: auto; padding: 2.5rem 1rem 4rem; }
+      .eyebrow { margin: 0; font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+      h1 { margin: .25rem 0 .5rem; font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; overflow-wrap: anywhere; }
+      h2 { margin: 2.5rem 0 1rem; font-size: 1.3rem; }
+      h3 { display: inline; margin: 0; font-size: 1.05rem; }
+      .sub { margin: 0; color: var(--muted); font-size: .9rem; }
+      .counts { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+      .badge { display: inline-block; padding: .1rem .55rem; border-radius: 999px; font-size: .78rem; font-weight: 700;
+               font-family: ui-monospace, monospace; background: var(--ignored-bg); color: var(--ignored); white-space: nowrap; }
+      .item { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--ignored);
+              border-radius: .5rem; padding: .8rem 1rem; margin-bottom: .75rem; }
+      .item header { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
+      .item p { margin: .4rem 0 0; overflow-wrap: anywhere; }
+      .meta { color: var(--muted); font-size: .82rem; }
+      .notes { margin: .5rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: .85rem; }
+      code { font-size: .85em; }
+      .tag { padding: 0 .45rem; border: 1px solid var(--line); border-radius: 999px; }
+      .s-todo { --c: var(--todo); --cb: var(--todo-bg); }
+      .s-doing { --c: var(--doing); --cb: var(--doing-bg); }
+      .s-done { --c: var(--done); --cb: var(--done-bg); }
+      .s-ignored { --c: var(--ignored); --cb: var(--ignored-bg); }
+      .s-reoccured { --c: var(--reoccured); --cb: var(--reoccured-bg); }
+      .badge[class*="s-"] { color: var(--c); background: var(--cb); }
+      .item[class*="s-"] { border-left-color: var(--c); }
+      details { margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+      summary { cursor: pointer; font-size: 1.3rem; font-weight: 700; }
+      details[open] summary { margin-bottom: 1rem; }
+      .empty { color: var(--muted); }
+      :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Project journal</p>
+      <h1>{{project}}</h1>
+      <p class="sub">Updated <time>{{updated}}</time></p>
+      <div class="counts">{{counts}}</div>
+
+      <section aria-labelledby="active">
+        <h2 id="active">Active</h2>
+        {{active}}
+      </section>
+
+      <details>
+        <summary>Done ({{done_count}})</summary>
+        {{done}}
+      </details>
+
+      <details>
+        <summary>Ignored ({{ignored_count}})</summary>
+        {{ignored}}
+      </details>
+    </main>
+  </body>
+</html>

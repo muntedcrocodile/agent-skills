@@ -142,6 +142,19 @@ class PublishingTests(unittest.TestCase):
             publisher.publish(self.source, "report")
         self.assertIn("A report", (self.base / "shares/tailnet/report" / self.source.name).read_text())
 
+    def test_lone_index_page_is_linked_by_folder(self) -> None:
+        page = self.source.with_name("index.html")
+        page.write_text("<h1>Page</h1>")
+        self.assertTrue(publisher.publish(page, "page").endswith(":8444/page/"))
+        self.assertTrue((self.base / "shares/tailnet/page/index.html").is_file())
+
+    def test_replace_updates_publication_in_place(self) -> None:
+        first = publisher.publish(self.source, "report")
+        self.source.write_text("changed")
+        self.assertEqual(publisher.publish(self.source, "report", replace=True), first)
+        self.assertEqual((self.base / "shares/tailnet/report" / self.source.name).read_text(), "changed")
+        self.assertEqual([path.name for path in (self.base / "shares").iterdir()], ["tailnet"])
+
     def test_stop_only_removes_selected_endpoint_and_retains_files(self) -> None:
         publisher.publish(self.source, "private")
         publisher.publish(self.source, "public", public=True)

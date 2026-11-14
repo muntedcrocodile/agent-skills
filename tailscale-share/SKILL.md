@@ -23,11 +23,15 @@ python3 /path/to/tailscale-share/scripts/publish.py publish /absolute/path/stati
 ```
 
 Use a distinct lowercase slug for each publication. Directories preserve relative
-assets; put `index.html` at the root for a site. The helper copies the artifact,
+assets; put `index.html` at the root for a site. A site or a lone `index.html` is
+linked by its folder URL ending in `/` (for example `https://host:8444/report/`).
+Share exactly the URL the helper prints; never append `index.html` to it. The helper copies the artifact,
 checks the tailnet, configures a persistent endpoint, checks for route conflicts,
 and fetches the result before printing the link. Return that URL as a Markdown link.
 If verification fails, report that failure and the URL; do not call it verified.
 Avoid overwriting an earlier publication; choose another slug for a revision.
+For a living document that should keep one link (such as a project journal),
+add `--replace` to update that publication in place.
 
 The always-shared directory is `~/Public/agent-share/tailnet`, on HTTPS port 8444.
 After `init`, files copied directly there are immediately available, including new

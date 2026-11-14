@@ -1,6 +1,6 @@
 # Third-party skills
 
-The following skills are imported or adapted from [Matt Pocock’s skills](https://github.com/mattpocock/skills), verified against revision `59db609eb1e18aaf59b63284d0e52255aff0c63c`. This is the comparison revision; the original import revision was not recorded. Local adaptations include trigger descriptions and T3 agent orchestration.
+The following skills are imported or adapted from [Matt Pocock’s skills](https://github.com/mattpocock/skills), verified against revision `59db609eb1e18aaf59b63284d0e52255aff0c63c`. This is the comparison revision; the original import revision was not recorded. Local adaptations include trigger descriptions, model invocation, and T3 agent orchestration.
 
 - `domain-modeling/`: [skills/engineering/domain-modeling/](https://github.com/mattpocock/skills/tree/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/engineering/domain-modeling/)
 - `grill-with-docs/`: [skills/engineering/grill-with-docs/](https://github.com/mattpocock/skills/tree/59db609eb1e18aaf59b63284d0e52255aff0c63c/skills/engineering/grill-with-docs/)
